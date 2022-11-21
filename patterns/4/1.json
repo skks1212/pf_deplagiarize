@@ -1,0 +1,8 @@
+{
+    "name" : "sol_1",
+    "description" : "Submission similar to - https://github.com/vijay-10/WD201-level4",
+    "files" : {
+        "todo.js" : "https://raw.githubusercontent.com/vijay-10/WD201-level4/main/todo.js",
+        "__tests__/todo.js" : "https://raw.githubusercontent.com/vijay-10/WD201-level4/main/__tests__/todo.js"
+    }
+}

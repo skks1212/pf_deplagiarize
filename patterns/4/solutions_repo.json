@@ -1,5 +1,5 @@
 {
-    "name" : "L4 official solution",
+    "name" : "l4_official",
     "description" : "Submission similar to L4 solution repo",
     "files" : {
         "todo.js" : "https://raw.githubusercontent.com/pupilfirst/wd201-nodejs-solutions/main/l4/todo.js",

@@ -2,6 +2,7 @@ import requests
 import os
 import json
 from lavenshtein import percent_diff
+from os.path import exists
 
 def get_verdict(github_link : str, level = 4, cutoff : int = 20):
     strip_github_link = github_link.split("github.com/")[1]
@@ -25,7 +26,19 @@ def get_verdict(github_link : str, level = 4, cutoff : int = 20):
 
             for file in files.keys():
                 submitted = requests.get(raw_link + file).text
-                control = requests.get(files[file]).text
+                pattern_dir = os.path.dirname(__file__) + "/source/" + data["name"] + "/"
+
+                if not exists(pattern_dir):
+                    os.makedirs(pattern_dir)
+
+                source = pattern_dir + file.replace("/", "_")
+
+                if not exists(source):
+                    with open(source, "w") as f:
+                        f.write(requests.get(files[file]).text)
+
+                with open(source) as f:
+                    control = f.read()
 
                 diff = percent_diff(submitted, control)
 

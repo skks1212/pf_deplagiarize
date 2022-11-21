@@ -29,7 +29,8 @@ def start(index = 0):
             print("Reviewing submission " + submission.get_attribute("href"))
             review(driver, submission)
         start(index + 1)
-    except:
+    except(Exception) as e:
+        print(e)
         audio_file = os.path.dirname(__file__) + "/buzzer.wav"
         playsound(audio_file)
 

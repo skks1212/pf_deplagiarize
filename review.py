@@ -66,7 +66,6 @@ def review(driver, submission):
         for i in range(1, len(values) + 1):
             xpath = f'//*[@id="mG61Hd"]/div[2]/div/div[2]/div[{i}]/div/div/div[2]/div/div[1]/div/div[1]/input'
             driver.find_element(By.XPATH, xpath).send_keys(values[i - 1])
-            print(i)
         
         driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div[2]/textarea').send_keys(
             verdict["message"] + " (" + str(verdict["percent"]) + "% match)"
