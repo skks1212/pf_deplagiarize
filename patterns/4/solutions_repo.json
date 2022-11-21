@@ -1,0 +1,9 @@
+{
+    "name" : "L4 official solution",
+    "description" : "Submission similar to L4 solution repo",
+    "files" : {
+        "todo.js" : "https://raw.githubusercontent.com/pupilfirst/wd201-nodejs-solutions/main/l4/todo.js",
+        "__tests__/todo.js" : "https://raw.githubusercontent.com/pupilfirst/wd201-nodejs-solutions/main/l4/__tests__/todo.js"
+    },
+    "contains" : ["generateReportFromResults.js"]
+}
