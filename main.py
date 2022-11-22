@@ -32,7 +32,8 @@ def start(index = 0):
     except(Exception) as e:
         print(e)
         audio_file = os.path.dirname(__file__) + "/buzzer.wav"
-        playsound(audio_file)
+        # playsound(audio_file)
+        start(index)
 
 start()
 

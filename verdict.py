@@ -4,7 +4,7 @@ import json
 from lavenshtein import percent_diff
 from os.path import exists
 
-def get_verdict(github_link : str, level = 4, cutoff : int = 20):
+def get_verdict(github_link : str, level = 4, cutoff : int = 15):
     strip_github_link = github_link.split("github.com/")[1]
     test_link = "https://raw.githubusercontent.com/" + strip_github_link + "/main/"
 
