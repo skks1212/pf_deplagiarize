@@ -21,7 +21,7 @@ We encourage you to go through the lessons in this level, work on your *own solu
 ---
 '''
 
-def review(driver, submission):
+def review(driver, submission, options):
     submission_link = submission.get_attribute("href")
 
     with open("verdicts.json", "r") as f:
@@ -46,17 +46,18 @@ def review(driver, submission):
     verdict = get_verdict(github_link)
 
     if verdict["verdict"]:
-        print("This submissions looks plagiarized")
-        print(verdict)
-        print("Grade as plagiarized? (Y/n)")
-        command = input()
-        if command.strip() not in ("Y", "y", ""):
-            print("Moving ahead...")
-            driver.close()
-            driver.switch_to.window(driver.window_handles[0])
-            return
-        
-        print('Marking as plagiarized...')
+        if options["auto"] == False: 
+            print("This submission looks plagiarized")
+            print(verdict)
+            print("Grade as plagiarized? (Y/n)")
+            command = input()
+            if command.strip() not in ("Y", "y", ""):
+                print("Moving ahead...")
+                driver.close()
+                driver.switch_to.window(driver.window_handles[0])
+                return
+
+            print('Marking as plagiarized...')
 
         student_link = driver.find_element(By.XPATH, '//span[text()="Submitted by "]').find_element(By.XPATH, "..").find_element(By.TAG_NAME, "a").get_attribute("href")
         driver.execute_script("window.open('');")
@@ -81,12 +82,17 @@ def review(driver, submission):
             verdict["message"] + " (" + str(verdict["percent"]) + "% match)"
         )
         
-        # driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div').click()
+        if options["demo"] != True:
+            driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div').click()
 
         driver.close()
         driver.switch_to.window(driver.window_handles[1])
 
-        '''
+        if options["demo"] == True:
+            print("Demo mode. Not grading")
+            driver.close()
+            driver.switch_to.window(driver.window_handles[0])
+            return
         try:
             driver.find_element(By.XPATH, '//button[text()="Start Review"]').click()
         except:
@@ -96,7 +102,6 @@ def review(driver, submission):
         driver.find_element(By.CSS_SELECTOR, '[aria-label="Markdown editor"]').send_keys(plagiarism_message)
         driver.find_element(By.XPATH, '//*[@id="app-router"]/div/div/div[2]/div[2]/div/div[4]/div[2]/div/div[1]/div/div/div[2]/button[4]').click()
         driver.find_element(By.XPATH, '//*[@id="app-router"]/div/div/div[2]/div[2]/div/div[5]/button').click()
-        '''
 
     with open("verdicts.json", "r") as f:
         data = json.load(f)

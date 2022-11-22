@@ -27,7 +27,7 @@ def start(index = 0):
         for i in range((index * 20), len(submissions)):
             submission = submissions[i]
             print("Reviewing submission " + submission.get_attribute("href"))
-            review(driver, submission)
+            review(driver, submission, {"demo": True, "auto" : False})
         start(index + 1)
     except(Exception) as e:
         print(e)
